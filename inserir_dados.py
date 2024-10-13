@@ -5,7 +5,6 @@ from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
 from key import connection_string
 
-
 num_de_pessoas = int(input("Insira o numero de pessoas para inserir no banco: "))
 depart = [453, 654, 236, 735]
 formado = [True, False]
@@ -30,7 +29,6 @@ def inserir(collection, data):
         ((client["projeto"])[collection]).insert_one(data)
         print("Dado inserido!")
         pprint(data)
-        # pass
     except Exception as e:
         print(e)
 
@@ -158,9 +156,6 @@ for i in range(num_de_pessoas):  # Insere histórico do aluno / Matriz curricula
     disciplinas = ((client["projeto"])["disciplina"]).find({ "id": curso })
     lista_disciplinas = [disciplina["id"] for disciplina in disciplinas]
     limite_disciplinas = len(lista_disciplinas) - rand.randint(0, 4)
-    
-    type(disciplinas)
-    # pprint(disciplinas)
     semestre = 0
     for m in range(limite_disciplinas):
         semestre += 1
@@ -171,7 +166,7 @@ for i in range(num_de_pessoas):  # Insere histórico do aluno / Matriz curricula
             "ano": data_inicial, 
             "nota": round(nota, 2) 
         })
-        print(lista_disciplinas[m])
+        # print(lista_disciplinas[m])
         data_inicial += 1
     
     # Atualizar estado de formado
@@ -196,14 +191,4 @@ atualizar("departamento", 453, {"id_chefe_departamento" : rand.randint(0,(num_de
 atualizar("departamento", 654, {"id_chefe_departamento" : rand.randint(0,(num_de_pessoas-1))});
 atualizar("departamento", 236, {"id_chefe_departamento" : rand.randint(0,(num_de_pessoas-1))});
 atualizar("departamento", 735, {"id_chefe_departamento" : rand.randint(0,(num_de_pessoas-1))});
-# executa("\
-#     UPDATE departamentos SET id_chefe_departamento = %d where id_departamento = '453';\
-#     UPDATE departamentos SET id_chefe_departamento = %d where id_departamento = 654;\
-#     UPDATE departamentos SET id_chefe_departamento = %d where id_departamento = 236;\
-#     UPDATE departamentos SET id_chefe_departamento = %d where id_departamento = 735;\
-#     "%(
-#         rand.randint(0,num_de_pessoas-1),
-#         rand.randint(0,num_de_pessoas-1),
-#         rand.randint(0,num_de_pessoas-1),
-#         rand.randint(0,num_de_pessoas-1)))
 client.close()
