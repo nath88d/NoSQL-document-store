@@ -39,9 +39,8 @@ def atualizar(collection, filtro, data):
     { "id":filtro },  # Filtro
     { "$set": data }  # Dado a ser atualizado
     )
-    #{ "returnNewDocument": "true" }  # Retorna resultado 
     print("Dado atualizado!")
-    pprint(data)
+    # pprint(data)
 
 
 def delete_collection(collection):
@@ -61,10 +60,10 @@ delete_collection("curso")
 delete_collection("departamento")
 
 # #departamento
-inserir("departamento", { "id": 453, "nome_curso": "Computacao" });
-inserir("departamento", { "id": 654, "nome_curso": "Engenharia" });
-inserir("departamento", { "id": 236, "nome_curso": "Administracao" });
-inserir("departamento", { "id": 735, "nome_curso": "Economia" });
+inserir("departamento", { "id": 453, "nome_curso": "Computacao" , "id_chefe_departamento": 0});
+inserir("departamento", { "id": 654, "nome_curso": "Engenharia" , "id_chefe_departamento": 0});
+inserir("departamento", { "id": 236, "nome_curso": "Administracao" , "id_chefe_departamento": 0});
+inserir("departamento", { "id": 735, "nome_curso": "Economia" , "id_chefe_departamento": 0});
 
 # #cursos
 inserir("curso", { "id": 0, "nome_curso": "Administração de Empresas" });
@@ -117,8 +116,7 @@ for i in range(num_de_pessoas):  # Insere aluno
     inserir("aluno", { 
         "id": num, 
         "nome": names.get_full_name(), 
-        "formado": formado[rand.randint(0, 1)], 
-        "outro": None 
+        "formado": formado[rand.randint(0, 1)]
     })
     num += 1
 
@@ -157,33 +155,36 @@ for i in range(num_de_pessoas):  # Insere histórico do aluno / Matriz curricula
     })
     
     # Selecionar disciplinas
-    disciplinas = list(((client["projeto"])["disciplina"]).find({ "id_curso": curso }))
-
+    disciplinas = ((client["projeto"])["disciplina"]).find({ "id": curso })
+    lista_disciplinas = [disciplina["id"] for disciplina in disciplinas]
+    limite_disciplinas = len(lista_disciplinas) - rand.randint(0, 4)
     
+    type(disciplinas)
+    # pprint(disciplinas)
     semestre = 0
-    for m in range(0, (len(disciplinas) - rand.randint(0, 4))):
+    for m in range(limite_disciplinas):
         semestre += 1
         inserir("historico_aluno", { 
             "id_aluno": num, 
-            "id_disciplina": disciplinas[m][0], 
+            "id_disciplina": lista_disciplinas[m], 
             "semestre": semestre, 
             "ano": data_inicial, 
             "nota": round(nota, 2) 
         })
-        print(disciplinas[m][0])
+        print(lista_disciplinas[m])
         data_inicial += 1
     
     # Atualizar estado de formado
     if (nota >= 5 and sem_inicial == 8):
-        atualizar("aluno", str(num),{ 
-            "id_aluno": num, 
+        atualizar("aluno", num,{ 
+            "id": num, 
             "formado": 'True', 
             "grupo_tcc": rand.randint(0, round(0.2 * num_de_pessoas)) 
         })
         print("formado")
     else:
-        atualizar("aluno", str(num), { 
-            "id_aluno": num, 
+        atualizar("aluno", num, { 
+            "id": num, 
             "formado": 'False' 
         })
         print("não formado")
@@ -191,7 +192,10 @@ for i in range(num_de_pessoas):  # Insere histórico do aluno / Matriz curricula
     num += 1
 
 ### Atualizar departamento e alunos 
-
+atualizar("departamento", 453, {"id_chefe_departamento" : rand.randint(0,(num_de_pessoas-1))});
+atualizar("departamento", 654, {"id_chefe_departamento" : rand.randint(0,(num_de_pessoas-1))});
+atualizar("departamento", 236, {"id_chefe_departamento" : rand.randint(0,(num_de_pessoas-1))});
+atualizar("departamento", 735, {"id_chefe_departamento" : rand.randint(0,(num_de_pessoas-1))});
 # executa("\
 #     UPDATE departamentos SET id_chefe_departamento = %d where id_departamento = '453';\
 #     UPDATE departamentos SET id_chefe_departamento = %d where id_departamento = 654;\
@@ -202,5 +206,4 @@ for i in range(num_de_pessoas):  # Insere histórico do aluno / Matriz curricula
 #         rand.randint(0,num_de_pessoas-1),
 #         rand.randint(0,num_de_pessoas-1),
 #         rand.randint(0,num_de_pessoas-1)))
-# print("\nDados inseridos com sucesso!")
 client.close()
