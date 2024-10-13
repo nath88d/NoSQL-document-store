@@ -140,7 +140,7 @@ for i in range(round(0.2 * num_de_pessoas)):  # Insere grupo TCC
         "id_aluno": rand.randint(0, num_de_pessoas) 
     })
     num += 1
-
+num = 0
 for i in range(num_de_pessoas):  # Insere histórico do aluno / Matriz curricular / verificar nota e alterar formado
     nota = rand.uniform(0, 10)
     print(nota)
