@@ -58,10 +58,10 @@ delete_collection("curso")
 delete_collection("departamento")
 
 # #departamento
-inserir("departamento", { "id": 453, "nome_curso": "Computacao" , "id_chefe_departamento": 0});
-inserir("departamento", { "id": 654, "nome_curso": "Engenharia" , "id_chefe_departamento": 0});
-inserir("departamento", { "id": 236, "nome_curso": "Administracao" , "id_chefe_departamento": 0});
-inserir("departamento", { "id": 735, "nome_curso": "Economia" , "id_chefe_departamento": 0});
+inserir("departamento", { "id": 453, "nome_departamento": "Computacao" , "id_chefe_departamento": 0});
+inserir("departamento", { "id": 654, "nome_departamento": "Engenharia" , "id_chefe_departamento": 0});
+inserir("departamento", { "id": 236, "nome_departamento": "Administracao" , "id_chefe_departamento": 0});
+inserir("departamento", { "id": 735, "nome_departamento": "Economia" , "id_chefe_departamento": 0});
 
 # #cursos
 inserir("curso", { "id": 0, "nome_curso": "Administração de Empresas" });
@@ -133,7 +133,8 @@ num = 0
 for i in range(round(0.2 * num_de_pessoas)):  # Insere grupo TCC
     inserir("grupo_tcc", { 
         "id_grupo": num, 
-        "id_aluno": rand.randint(0, num_de_pessoas) 
+        "id_aluno": rand.randint(0, num_de_pessoas),
+        "id_professor": rand.randint(0, num_de_pessoas)
     })
     num += 1
 num = 0
@@ -155,7 +156,7 @@ for i in range(num_de_pessoas):  # Insere histórico do aluno / Matriz curricula
     # Selecionar disciplinas
     disciplinas = ((client["projeto"])["disciplina"]).find({ "id": curso })
     lista_disciplinas = [disciplina["id"] for disciplina in disciplinas]
-    limite_disciplinas = len(lista_disciplinas) - rand.randint(0, 4)
+    limite_disciplinas = rand.randint(0, len(lista_disciplinas))
     semestre = 0
     for m in range(limite_disciplinas):
         semestre += 1
