@@ -56,6 +56,7 @@ delete_collection("disciplina")
 delete_collection("matriz_curricular")
 delete_collection("curso")
 delete_collection("departamento")
+delete_collection("historico_aluno")
 
 # #departamento
 inserir("departamento", { "id": 453, "nome_departamento": "Computacao" , "id_chefe_departamento": 0});
@@ -114,7 +115,7 @@ for i in range(num_de_pessoas):  # Insere aluno
     inserir("aluno", { 
         "id": num, 
         "nome": names.get_full_name(), 
-        "formado": formado[rand.randint(0, 1)]
+        "formado": formado[1]
     })
     num += 1
 
@@ -133,7 +134,7 @@ num = 0
 for i in range(round(0.2 * num_de_pessoas)):  # Insere grupo TCC
     inserir("grupo_tcc", { 
         "id_grupo": num, 
-        "id_aluno": rand.randint(0, num_de_pessoas),
+        # "id_aluno": rand.randint(0, num_de_pessoas),
         "id_professor": rand.randint(0, num_de_pessoas)
     })
     num += 1
@@ -156,7 +157,7 @@ for i in range(num_de_pessoas):  # Insere histórico do aluno / Matriz curricula
     # Selecionar disciplinas
     disciplinas = ((client["projeto"])["disciplina"]).find({ "id": curso })
     lista_disciplinas = [disciplina["id"] for disciplina in disciplinas]
-    limite_disciplinas = rand.randint(0, len(lista_disciplinas))
+    limite_disciplinas = rand.randint(1, len(lista_disciplinas))
     semestre = 0
     for m in range(limite_disciplinas):
         semestre += 1
@@ -172,15 +173,13 @@ for i in range(num_de_pessoas):  # Insere histórico do aluno / Matriz curricula
     
     # Atualizar estado de formado
     if (nota >= 5 and sem_inicial == 8):
-        atualizar("aluno", num,{ 
-            "id": num, 
+        atualizar("aluno", num,{
             "formado": 'True', 
             "grupo_tcc": rand.randint(0, round(0.2 * num_de_pessoas)) 
         })
         print("formado")
     else:
-        atualizar("aluno", num, { 
-            "id": num, 
+        atualizar("aluno", num, {
             "formado": 'False' 
         })
         print("não formado")

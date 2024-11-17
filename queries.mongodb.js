@@ -195,19 +195,25 @@ db.departamento.aggregate([
 // um grupo de TCC e qual
 // professor foi o orientador
 
-db.grupo_tcc.aggregate([
+db.aluno.aggregate([ 
   {
+    $match: {
+      formado:"True"
+    }
+  }
+  
+  ,{
     $lookup: {
-      from: "aluno",
-      localField: "id_aluno",
-      foreignField: "id",
+      from: "grupo_tcc",
+      localField: "grupo_tcc",
+      foreignField: "id_grupo",
       as: "grupo_tcc",
     }
   },
   {
   $lookup: {
     from: "professor",
-    localField: "id_professor",
+    localField: "grupo_tcc.id_professor",
     foreignField: "id",
     as: "professor_orientador",
   }
