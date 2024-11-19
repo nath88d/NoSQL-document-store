@@ -18,9 +18,8 @@ Para se conectar com o MongoDB basta adicionar sua connection string no arquivo 
 
 names <br>
 random  <br>
-pprint <br>
-pymongo.mongo_client <br>
-pymongo.server_api
+print <br>
+pymongo <br>
 
 ----
 
@@ -32,7 +31,7 @@ Exemplo--> pip install names<br>
 
 <img width="478" alt="image" src="https://github.com/user-attachments/assets/fea971b8-6294-4577-9a56-4a4e1fbb79e4">
 
---> Fazer a mesma coisa com as demais bibliotecas: **pip install pprint**, **pip install pymongo.mongo_client** e **pip install pymongo.server_api**.
+--> Fazer a mesma coisa com as demais bibliotecas: **pip install print** e **pip install pymongo**.
 
 
 obs: Para executar estes comandos é necessario ter instalado previamente python3 na sua versão mais recente. 
