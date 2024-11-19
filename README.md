@@ -26,19 +26,22 @@ pymongo.server_api
 
 <h2>INSTALAÇÃO</h2>
 
-Utilizando um terminal de sua preferência, executar os seguintes comandos:<br>
-pip install names<br> 
-**pip install nos outros?
+Utilizando um terminal de sua preferência, executar os seguintes comandos:
 
-![image](https://github.com/nath88d/Banco-de-dados/assets/104024701/d109b5a5-acd5-4144-bc6a-b98ec286bffd)
-*print install outros
+Exemplo--> pip install names<br> 
+
+<img width="478" alt="image" src="https://github.com/user-attachments/assets/fea971b8-6294-4577-9a56-4a4e1fbb79e4">
+
+--> Fazer a mesma coisa com as demais bibliotecas: **pip install pprint**, **pip install pymongo.mongo_client** e **pip install pymongo.server_api**.
+
 
 obs: Para executar estes comandos é necessario ter instalado previamente python3 na sua versão mais recente. 
 
 ----
 <h2>INSERÇÃO DOS DADOS NO BANCO</h2>
-  Executar o arquivo `./inserir_dados.py` <br>
-  Após a inserção dos dados, utilizar o arquivo `queries.mongodb.js´ para fazer a requisição filtrada dos dados.
+  Executar o arquivo "./inserir_dados.py" 
+  
+  Após a inserção dos dados, utilizar o arquivo "queries.mongodb.js" para fazer a requisição filtrada dos dados.
 
   Exemplo de arquivo executado:<br>
   ***colocar
