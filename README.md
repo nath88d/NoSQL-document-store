@@ -43,7 +43,7 @@ obs: Para executar estes comandos é necessario ter instalado previamente python
   Após a inserção dos dados, utilizar o arquivo "queries.mongodb.js" para fazer a requisição filtrada dos dados.
 
   Exemplo de arquivo executado:<br>
-  ***colocar
+  <img width="548" alt="image" src="https://github.com/user-attachments/assets/0cf6820b-d106-4c20-99a8-c12bae30712c">
 
 ----
 <h2>DIAGRAMA RELACIONAL</h2>
